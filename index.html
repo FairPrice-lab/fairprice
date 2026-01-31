@@ -4,63 +4,60 @@
   <meta charset="utf-8" />
   <title>FairPrice — Quote Check</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <style>
-    :root {
-      --bg:#0b1220; --card:#121a2e; --text:#e7eefc;
-      --muted:#9aa8c7; --line:rgba(255,255,255,.08);
-      --accent:#7dd3fc;
-    }
+    :root{--bg:#0b1220;--card:#121a2e;--text:#e7eefc;--muted:#9aa8c7;--line:rgba(255,255,255,.08);--accent:#7dd3fc;--accent2:#a7f3d0;}
     *{box-sizing:border-box}
-    body{
-      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:var(--bg);color:var(--text)
-    }
-    .container{max-width:900px;margin:0 auto;padding:48px 20px}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
-    .brand{font-size:22px;font-weight:900}
-    .pill{border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:12px;color:var(--muted)}
-    h1{font-size:42px;line-height:1.1;margin:0 0 12px}
-    .sub{color:var(--muted);max-width:640px;line-height:1.6}
-    .card{margin-top:36px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
-    label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
-    input,select,textarea{
-      width:100%;padding:10px 12px;border-radius:12px;
-      border:1px solid var(--line);background:#0c1324;color:var(--text)
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    .container{max-width:920px;margin:0 auto;padding:46px 18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+    .brand{font-size:22px;font-weight:950;display:flex;align-items:center;gap:10px}
+    .logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+    .pill{border:1px solid var(--line);padding:7px 12px;border-radius:999px;font-size:12px;color:var(--muted)}
+    h1{font-size:42px;line-height:1.1;margin:0 0 10px}
+    .sub{color:var(--muted);line-height:1.6;max-width:680px;margin:0}
+    .card{margin-top:28px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:18px}
+    label{display:block;font-size:13px;font-weight:800;margin:12px 0 6px}
+    input,select,textarea,button{
+      width:100%;padding:11px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(5,10,20,.55);color:var(--text)
     }
     textarea{resize:vertical}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media(max-width:600px){.row{grid-template-columns:1fr}}
-    button{
-      margin-top:18px;width:100%;padding:12px;border-radius:14px;
-      border:none;background:var(--accent);color:#04101d;font-weight:900;cursor:pointer
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:620px){.row{grid-template-columns:1fr}}
+    .btn{
+      margin-top:12px;border:none;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#07101c;font-weight:950;cursor:pointer
     }
-    .status{margin-top:14px;font-size:14px;color:var(--muted)}
-    .result{
-      margin-top:18px;padding:14px;border-radius:14px;
-      border:1px solid var(--line);background:rgba(255,255,255,.03);display:none
+    .status{margin-top:10px;color:var(--muted);font-size:13px}
+    .result{display:none;margin-top:14px;border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)}
+    .badge{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+    .titleRow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .divider{height:1px;background:var(--line);margin:14px 0}
+    .paybox{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .linkBtn{
+      text-decoration:none;display:inline-block;
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      color:var(--text);background:rgba(255,255,255,.04);font-weight:950;cursor:pointer
     }
-    .badge{
-      display:inline-block;padding:6px 10px;border-radius:999px;
-      border:1px solid var(--line);font-size:12px;margin-bottom:10px
-    }
-    footer{
-      margin-top:36px;font-size:12px;color:var(--muted);line-height:1.5
-    }
+    .linkBtn.primary{border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07101c}
+    .fine{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.45}
+    .smallLinks{margin-top:8px;color:var(--muted);font-size:12px}
+    .smallLinks a{color:var(--muted)}
   </style>
 </head>
-
 <body>
   <div class="container">
     <header>
-      <div class="brand">FairPrice</div>
-      <div class="pill">Informational tool only</div>
+      <div class="brand"><div class="logo"></div>FairPrice</div>
+      <div class="pill">Informational only • Not professional advice</div>
     </header>
 
-    <h1>Check if a quote is fair<br>before you pay.</h1>
+    <h1>Know if a quote is fair<br/>before you pay.</h1>
     <p class="sub">
-      Upload a quote (PDF/image) or paste text. FairPrice gives a quick
-      fairness signal based on typical pricing.
+      Upload a quote (PDF/image) or paste it. Get a free preview instantly. Pay $6.99 to unlock the full report,
+      or subscribe for $17.99/mo for unlimited checks.
     </p>
 
     <div class="card">
@@ -74,44 +71,77 @@
         <div>
           <label>Category</label>
           <select id="category">
-            <option>Home Repair</option>
             <option>Plumbing</option>
             <option>Electrical</option>
+            <option>Home Repair</option>
             <option>Auto Repair</option>
             <option>Other</option>
           </select>
         </div>
         <div>
           <label>ZIP code</label>
-          <input id="zip" placeholder="e.g. 92618" />
+          <input id="zip" placeholder="e.g., 92618" />
         </div>
       </div>
 
       <label>Total quoted price (optional)</label>
-      <input id="price" placeholder="e.g. 514.19" />
+      <input id="price" placeholder="e.g., 514.19" />
 
-      <button id="checkBtn">Check quote</button>
+      <button class="btn" id="previewBtn">Check quote (free preview)</button>
 
-      <div class="status" id="status"></div>
+      <div id="status" class="status"></div>
 
-      <div class="result" id="resultBox">
-        <div class="badge" id="verdictBadge"></div>
-        <div id="verdictText"></div>
+      <div id="result" class="result">
+        <div class="titleRow">
+          <b id="resultTitle">Preview Result</b>
+          <span class="badge" id="resultBadge">—</span>
+        </div>
+        <div id="resultText" style="margin-top:8px;line-height:1.45"></div>
+
+        <div id="fullExtras" style="display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:12px">
+          <b>Full report</b>
+          <div class="fine" id="fullRange">Market range: —</div>
+          <div class="fine" id="fullTips">Negotiation tips: —</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="paybox">
+          <div>
+            <b>Unlock full report</b>
+            <div class="fine">One-time: <b>$6.99</b> • Unlimited: <b>$17.99/mo</b></div>
+          </div>
+
+          <div class="actions">
+            <button class="linkBtn primary" id="payOnceBtn">Pay $6.99</button>
+            <button class="linkBtn" id="subscribeBtn">Subscribe</button>
+          </div>
+        </div>
+
+        <!-- Your Stripe PAYMENT LINKS (fallback) -->
+        <div class="smallLinks">
+          Backup links (if buttons fail):
+          <a id="payOnceLink" target="_blank" rel="noopener">Pay $6.99</a>
+          •
+          <a id="subLink" target="_blank" rel="noopener">Subscribe</a>
+        </div>
+      </div>
+
+      <div class="fine">
+        FairPrice provides informational price comparisons only. It does not provide financial, legal, medical,
+        or professional advice. Results are estimates, not guarantees.
       </div>
     </div>
-
-    <footer>
-      FairPrice provides informational price comparisons only and does not provide
-      financial, legal, medical, or professional advice. Results are estimates and
-      not guarantees. Consult a qualified professional.
-    </footer>
   </div>
 
 <script>
-  const statusEl = document.getElementById("status");
-  const resultBox = document.getElementById("resultBox");
-  const verdictBadge = document.getElementById("verdictBadge");
-  const verdictText = document.getElementById("verdictText");
+  const $ = (id) => document.getElementById(id);
+
+  // Your Stripe Payment Links (fallback)
+  const PAYMENT_LINK_ONCE = "https://buy.stripe.com/test_4gM4gsaGF8cbbNdc4HeAg00";
+  const PAYMENT_LINK_SUB  = "https://buy.stripe.com/test_8x26oAeWVgIH4kLecPeAg01";
+  $("payOnceLink").href = PAYMENT_LINK_ONCE;
+  $("subLink").href = PAYMENT_LINK_SUB;
 
   async function toBase64(file){
     return new Promise((res, rej) => {
@@ -122,48 +152,99 @@
     });
   }
 
-  document.getElementById("checkBtn").onclick = async () => {
-    statusEl.textContent = "Analyzing quote…";
-    resultBox.style.display = "none";
+  function getSessionIdFromUrl(){
+    const p = new URLSearchParams(window.location.search);
+    return p.get("session_id");
+  }
+
+  async function buildPayload(){
+    const f = $("file").files[0];
+    return {
+      category: $("category").value,
+      zip: $("zip").value.trim(),
+      price: $("price").value.trim(),
+      quoteText: $("quoteText").value.trim(),
+      fileName: f ? f.name : null,
+      fileType: f ? f.type : null,
+      fileBase64: f ? await toBase64(f) : null
+    };
+  }
+
+  function showResult(data, isFull){
+    $("result").style.display = "block";
+    $("resultTitle").textContent = isFull ? "Full FairPrice Report" : "Preview Result";
+    $("resultBadge").textContent = (data?.verdict ? String(data.verdict).toUpperCase() : "RESULT");
+    $("resultText").textContent = isFull
+      ? "✅ Payment verified. Here’s your full report."
+      : (data?.note || "Preview generated. Pay to unlock the full report.");
+
+    if (isFull && data?.full_report){
+      $("fullExtras").style.display = "block";
+      $("fullRange").textContent = `Market range: ${data.full_report.market_range || "—"}`;
+      $("fullTips").textContent  = `Negotiation tips: ${data.full_report.negotiation_tips || "—"}`;
+    } else {
+      $("fullExtras").style.display = "none";
+    }
+  }
+
+  async function postJSON(url, body){
+    const res = await fetch(url, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const t = await res.text();
+      throw new Error(`API ${res.status}: ${t}`);
+    }
+    return res.json();
+  }
+
+  // Free preview
+  $("previewBtn").onclick = async () => {
+    $("status").textContent = "Analyzing preview…";
+    $("result").style.display = "none";
 
     try {
-      const f = document.getElementById("file").files[0];
-
-      const payload = {
-        mode: "preview",
-        price: document.getElementById("price").value,
-        category: document.getElementById("category").value,
-        zip: document.getElementById("zip").value,
-        quoteText: document.getElementById("quoteText").value,
-        fileName: f ? f.name : null,
-        fileType: f ? f.type : null,
-        fileBase64: f ? await toBase64(f) : null
-      };
-
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) {
-        const t = await res.text();
-        throw new Error(`API ${res.status}: ${t}`);
-      }
-
-      const data = await res.json();
-
-      verdictBadge.textContent = data.verdict || "RESULT";
-      verdictText.textContent =
-        data.note || "This is a preliminary estimate based on typical pricing.";
-
-      resultBox.style.display = "block";
-      statusEl.textContent = "";
-
+      const payload = await buildPayload();
+      const data = await postJSON("/api/analyze", { ...payload, mode: "preview" });
+      $("status").textContent = "";
+      showResult(data, false);
     } catch (e) {
-      statusEl.textContent = "Error checking quote: " + (e.message || "unknown");
+      $("status").textContent = "Error: " + (e?.message || "unknown");
     }
   };
+
+  // Start checkout via your serverless endpoint (real paywall)
+  async function startCheckout(kind){
+    $("status").textContent = "Opening secure checkout…";
+    try {
+      const data = await postJSON("/api/create-checkout-session", { kind });
+      if (data?.url) window.location.href = data.url;
+      else $("status").textContent = "Checkout error (no URL).";
+    } catch (e) {
+      $("status").textContent = "Checkout error: " + (e?.message || "unknown");
+    }
+  }
+
+  $("payOnceBtn").onclick = () => startCheckout("once");
+  $("subscribeBtn").onclick = () => startCheckout("sub");
+
+  // Auto-unlock after Stripe redirects back with session_id
+  (async () => {
+    const sessionId = getSessionIdFromUrl();
+    if (!sessionId) return;
+
+    $("status").textContent = "Payment detected. Verifying…";
+    try {
+      const payload = await buildPayload();
+      const data = await postJSON("/api/analyze", { ...payload, mode: "full", session_id: sessionId });
+      $("status").textContent = "";
+      showResult(data, true);
+    } catch (e) {
+      $("status").textContent = "Unlock error: " + (e?.message || "unknown");
+    }
+  })();
 </script>
 </body>
 </html>
